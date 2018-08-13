@@ -86,6 +86,11 @@
                             @include('layouts.sidebar')
                         </div>
                         <div class="col-md-10">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                             @yield('content')
                         </div>
                     @endguest
