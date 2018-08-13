@@ -35,4 +35,12 @@ class BookUserController extends Controller
         
         return redirect()->back();
     }
+
+    public function destroy(Request $request, Book $book)
+    {
+        $user = auth()->user();
+        $user->books()->detach($book);
+
+        return redirect($user->url());
+    }
 }
