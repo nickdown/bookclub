@@ -56,24 +56,37 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $user = auth()->user();
+
+        return view('profile.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // $this->validate($request, [
+        //     'avatar' => 'file|image|mimes:jpeg,png,jpg|max:2048'
+        // ]);
+        
+        // $file = $request->file('avatar');
+        // $filename = 'avatar-' . time() . '.' . $file->getClientOriginalExtension();
+        // $path = $file->storeAs('public', $filename);
+
+        // $user = auth()->user();
+        // $user->avatar = $path;
+        // $user->save();
+
+        
+        return redirect()->back();
     }
 
     /**
