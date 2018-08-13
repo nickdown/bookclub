@@ -43,13 +43,8 @@ class BookController extends Controller
             'image' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
         ]);
         
-        // cache the file
         $file = $request->file('image');
-
-        // generate a new filename. getClientOriginalExtension() for the file extension
         $filename = 'book-' . time() . '.' . $file->getClientOriginalExtension();
-
-        // save to storage/app/photos as the new $filename
         $path = $file->storeAs('public', $filename);
 
         $book = Book::firstOrCreate([
@@ -58,8 +53,6 @@ class BookController extends Controller
             'image' => $path
         ]);
 
-        $book->readers()->attach(auth()->user());
-        
         return redirect($book->url());
     }
 
