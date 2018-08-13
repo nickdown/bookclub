@@ -20,7 +20,6 @@ class Book extends Model
     {
         $image = Storage::url($this->getOriginal('image'));
         
-        info($image);
         if (is_null($image)) {
             return '/public/images/book-default.jpg';
         }
