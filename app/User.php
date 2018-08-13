@@ -5,6 +5,7 @@ namespace App;
 use App\Book;
 use App\BookUser;
 use App\Statuses\BookStatus;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -56,6 +57,17 @@ class User extends Authenticatable
     public function getRating(Book $book)
     {
         return optional(BookUser::where('book_id', $book->id)->where('user_id', $this->id)->first())->rating;
+    }
+
+    public function getAvatarAttribute()
+    {
+        $image = Storage::url($this->getOriginal('avatar'));
+        
+        if (is_null($image)) {
+            return '';
+        }
+
+        return $image;
     }
 
     /**
