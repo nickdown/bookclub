@@ -1,5 +1,5 @@
 <div class="list-group">
-  <a href="/home" class="list-group-item list-group-item-action {{ Request::is('home') ? 'active' : '' }}">
+  <a href="/profile" class="list-group-item list-group-item-action {{ Request::is('profile') ? 'active' : '' }}">
     My Profile
   </a>
   <a href="/books" class="list-group-item list-group-item-action {{ Request::is('books') ? 'active' : '' }}">
