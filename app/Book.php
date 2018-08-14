@@ -4,6 +4,7 @@ namespace App;
 
 use App\User;
 use App\BookUser;
+use App\Statuses\BookStatus;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,5 +41,20 @@ class Book extends Model
             return null;
         }
         return (float) number_format($rating, 1);
+    }
+
+    public function scopeUnstarted($query)
+    {
+        return $query->where('status', BookStatus::UNSTARTED);
+    }
+
+    public function scopeStarted($query)
+    {
+        return $query->where('status', BookStatus::STARTED);
+    }
+
+    public function scopeFinished($query)
+    {
+        return $query->where('status', BookStatus::FINISHED);
     }
 }
