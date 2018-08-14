@@ -14,7 +14,7 @@ class BookUserController extends Controller
 
         $user->books()->syncWithoutDetaching($book);
 
-        return redirect("/home");
+        return redirect()->back();
     }
 
     public function update(Request $request, Book $book)
@@ -41,6 +41,6 @@ class BookUserController extends Controller
         $user = auth()->user();
         $user->books()->detach($book);
 
-        return redirect($user->url());
+        return redirect()->back();
     }
 }
