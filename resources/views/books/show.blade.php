@@ -6,7 +6,7 @@
 
         <div class="card-body">
             <div class="text-center">
-                @include('partials.book-image')
+                @include('books.partials.book-image')
                 <br>
                 <br>
                 <strong>Author:</strong> {{ $book->author }}
@@ -19,6 +19,11 @@
                 <hr>                
             @else
                 This book is in your library!
+                <form action="/books/{{ $book->id }}/remove" method="POST">
+                    @csrf()
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Remove From Collection</button>
+                </form>
                 <hr>
                     <div class="row">
                         <div class="col col-sm-6">
