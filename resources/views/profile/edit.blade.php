@@ -10,19 +10,16 @@
                 @method('PATCH')
                 <div class="form-group">
                     <label for="user-name-input">Name:</label>
-                    <input type="text" class="form-control" id="user-name-input" name="name" placeholder="{{ $user->name }}" value="{{ $user->name }}">
+                    <input type="text" class="form-control" id="user-name-input" name="name" placeholder="{{ $user->name }}">
+                    <subtext>Optional</subtext>
                 </div>
 
                 <div class="form-group">
-                    <label for="user-email-input">Email:</label>
-                    <input type="text" class="form-control" id="user-email-input" name="email" placeholder="{{ $user->email }}" value="{{ $user->email }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="avatar-input">Cover:</label>
+                    <label for="avatar-input">Avatar:</label>
                     <input type="file" accept=".png, .jpg, .jpeg" class="form-control-file" name="avatar" id="avatar-input">
                 </div>
-                <button type="submit" class="btn btn-primary">Update Avatar</button>
+
+                <button type="submit" class="btn btn-primary">Update Profile</button>
             </form>
         </div>
     </div>

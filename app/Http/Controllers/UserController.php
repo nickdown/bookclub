@@ -73,19 +73,25 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        // $this->validate($request, [
-        //     'avatar' => 'file|image|mimes:jpeg,png,jpg|max:2048'
-        // ]);
-        
-        // $file = $request->file('avatar');
-        // $filename = 'avatar-' . time() . '.' . $file->getClientOriginalExtension();
-        // $path = $file->storeAs('public', $filename);
+        $user = auth()->user();
 
-        // $user = auth()->user();
-        // $user->avatar = $path;
-        // $user->save();
-
+        $this->validate($request, [
+            'name' => 'nullable|string|max:255',
+            'avatar' => 'file|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+        if ($request->has('name') && ! is_null($request->input('name'))) {
+            $user->name = $request->name;
+        }
         
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $filename = 'avatar-' . time() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public', $filename);
+            $user->avatar = $path;
+        }
+       
+        $user->save();
+
         return redirect()->back();
     }
 
