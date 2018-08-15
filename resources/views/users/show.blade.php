@@ -1,36 +1,56 @@
 @extends('layouts.app')
 
-@section('content')    
+@section('content')  
     <div class="card">
-        <div class="card-header"><a href="/users">All Users</a> > {{ $user->name }}</div>
+        <div class="card-header">{{ auth()->id() == $user->id ? 'My Profile' : $user->name . "'s Profile" }}</div>
 
         <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
+            <div class="d-flex">
+                <img class="m-2" src="{{ $user->avatar }}" alt="{{ $user->name }}" style="border-radius: 50%;" width="75px" height="75px"></img>
+                <div class="m-2">
+                    <h1>{{ $user->name }}</h1>
+                    <h4>{{ $user->email }}</h4>
                 </div>
-            @endif
-            {{ $user->name }} is reading:
-            <table class="table mt-4">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Title:</th>
-                        <th>Author:</th>
-                        <th>Status:</th>
-                        <th>My Rating:</th>
-                    </tr>
-                <thead>
-                <tbody>
-                    @foreach($user->books as $book)
-                        <tr>
-                            <td><a href="{{ $book->url() }}">{{ $book->title }}</a></td>
-                            <td>{{ $book->author }}</td>
-                            <td>{{ $book->pivot->status }}</td>
-                            <td>{{ ! is_null($book->pivot->rating) ? $book->pivot->rating : 'not rated'}}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            </div>
+        </div>
+    </div>
+
+    @include('users.partials.stats')
+
+    <div class="card my-4">
+        <div class="card-header">{{ $user->name }}'s Current Books:</div>
+
+        <div class="card-body">
+            @include('books.partials.book-list', ['books' => $user->books()->current()->get()])
+        </div>
+    </div>
+
+    <div class="card my-4">
+        <div class="card-header">{{ $user->name }}'s Completed Books:</div>
+
+        <div class="card-body">
+            @include('books.partials.book-list', ['books' => $user->books()->completed()->get()])
+        </div>
+    </div>
+
+    <div class="card my-4">
+        <div class="card-header">{{ $user->name }}'s Queued Books:</div>
+
+        <div class="card-body">
+            @include('books.partials.book-list', ['books' => $user->books()->queued()->get()])
+        </div>
+    </div>
+
+    <div class="card my-4">
+        <div class="card-header">Discussion</div>
+
+        <div class="card-body">
+            @foreach($user->comments as $comment)
+                <strong>{{ $comment->user->name }} said on <a href="{{ $comment->book->url() }}">{{ $comment->book->title }}</a>:</strong>
+                <br>
+                <div style="white-space: pre-wrap;">{{ $comment->body }}</div>
+                <hr>
+            @endforeach
         </div>
     </div>
 @endsection

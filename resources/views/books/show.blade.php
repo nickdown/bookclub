@@ -61,4 +61,26 @@
             </table>
         </div>
     </div>
+    <div class="card my-4">
+        <div class="card-header">Discussion</div>
+
+        <div class="card-body">
+            @foreach($book->comments as $comment)
+                <strong>{{ $comment->user->name }} said:</strong>
+                <br>
+                <div style="white-space: pre-wrap;">{{ $comment->body }}</div>
+                <hr>
+            @endforeach
+            <form action="/comments" method="POST">
+                @csrf()
+                <input type="hidden" name="book" value="{{ $book->id }}">
+                <div class="form-group">
+                    <label for="body">Add a Comment:</label>
+                    <textarea class="form-control" id="body" name="body" placeholder="Your opinion is valueable!"></textarea>
+                </div>
+                
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 @endsection

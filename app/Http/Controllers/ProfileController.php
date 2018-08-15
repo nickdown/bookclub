@@ -12,6 +12,6 @@ class ProfileController extends Controller
 
         $user->load('books');
         
-        return view('profile.show', compact('user'));
+        return view('users.show', compact('user'));
     }
 }

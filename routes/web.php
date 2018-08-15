@@ -16,3 +16,5 @@ Route::patch('/user/books/{book}', 'BookUserController@update');
 Route::patch('/user', 'UserController@update');
 Route::delete('/books/{book}/remove', 'BookUserController@destroy');
 Route::resource('/books', 'BookController');
+
+Route::post('/comments', 'CommentController@store');

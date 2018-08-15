@@ -17,6 +17,11 @@ class Book extends Model
         return $this->belongsToMany(User::class)->using(BookUser::class)->withPivot('status', 'rating');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function getImageAttribute()
     {
         $image = Storage::url($this->getOriginal('image'));

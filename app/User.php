@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Book;
+use App\Comment;
 use App\BookUser;
 use App\Statuses\BookStatus;
 use Illuminate\Support\Facades\Storage;
@@ -16,6 +17,11 @@ class User extends Authenticatable
     public function books()
     {
         return $this->belongsToMany(Book::class)->using(BookUser::class)->withPivot('status', 'rating');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function owns(Book $book): bool
