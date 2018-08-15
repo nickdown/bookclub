@@ -70,7 +70,7 @@
             @foreach($book->comments as $comment)
                 <div class="d-flex justify-content-between">
                     <div>
-                        <strong>{{ $comment->user->name }} said:</strong>
+                        <strong><a href="{{ $comment->user->url() }}">{{ $comment->user->name }}</a> said:</strong>
                         <br>
                         <div style="white-space: pre-wrap;">{{ $comment->body }}</div>
                     </div>
