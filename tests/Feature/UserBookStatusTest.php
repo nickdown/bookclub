@@ -19,39 +19,39 @@ class UserBookStatusTest extends TestCase
         $this->assertNull($user->bookStatus($book));
     }
 
-    public function test_a_users_book_status_is_unstarted()
+    public function test_a_users_book_status_is_queued()
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
         
         $user->books()->attach($book, [
-            'status' => BookStatus::UNSTARTED
+            'status' => BookStatus::QUEUED
         ]);
 
-        $this->assertSame(BookStatus::string(BookStatus::UNSTARTED), $user->bookStatus($book));
+        $this->assertSame(BookStatus::string(BookStatus::QUEUED), $user->bookStatus($book));
     }
 
-    public function test_a_users_book_status_is_started()
+    public function test_a_users_book_status_is_current()
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
 
         $user->books()->attach($book, [
-            'status' => BookStatus::STARTED
+            'status' => BookStatus::CURRENT
         ]);
 
-        $this->assertSame(BookStatus::string(BookStatus::STARTED), $user->bookStatus($book));
+        $this->assertSame(BookStatus::string(BookStatus::CURRENT), $user->bookStatus($book));
     }
 
-    public function test_a_users_book_status_is_finished()
+    public function test_a_users_book_status_is_completed()
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
 
         $user->books()->attach($book, [
-            'status' => BookStatus::FINISHED
+            'status' => BookStatus::COMPLETED
         ]);
 
-        $this->assertSame(BookStatus::string(BookStatus::FINISHED), $user->bookStatus($book));
+        $this->assertSame(BookStatus::string(BookStatus::COMPLETED), $user->bookStatus($book));
     }
 }

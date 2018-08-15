@@ -12,50 +12,50 @@ class BookUserScopeTest extends TestCase
     use RefreshDatabase;
     
     /** @test */
-    function a_book_user_has_a_finished_scope()
+    function a_book_user_has_a_completed_scope()
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
         
         $user->books()->attach($book, [
-            'status' => BookStatus::FINISHED
+            'status' => BookStatus::COMPLETED
         ]);
 
         $this->assertSame(1, $user->books()->count());
-        $this->assertSame(1, $user->books()->finished()->count());
-        $this->assertSame(0, $user->books()->unstarted()->count());
-        $this->assertSame(0, $user->books()->started()->count());
+        $this->assertSame(1, $user->books()->completed()->count());
+        $this->assertSame(0, $user->books()->queued()->count());
+        $this->assertSame(0, $user->books()->current()->count());
     }
 
     /** @test */
-    function a_book_user_has_a_started_scope()
+    function a_book_user_has_a_current_scope()
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
 
         $user->books()->attach($book, [
-            'status' => BookStatus::STARTED
+            'status' => BookStatus::CURRENT
         ]);
 
         $this->assertSame(1, $user->books()->count());
-        $this->assertSame(0, $user->books()->finished()->count());
-        $this->assertSame(0, $user->books()->unstarted()->count());
-        $this->assertSame(1, $user->books()->started()->count());
+        $this->assertSame(0, $user->books()->completed()->count());
+        $this->assertSame(0, $user->books()->queued()->count());
+        $this->assertSame(1, $user->books()->current()->count());
     }
 
     /** @test */
-    function a_book_user_has_an_unstarted_scope()
+    function a_book_user_has_an_queued_scope()
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
 
         $user->books()->attach($book, [
-            'status' => BookStatus::UNSTARTED
+            'status' => BookStatus::QUEUED
         ]);
 
         $this->assertSame(1, $user->books()->count());
-        $this->assertSame(0, $user->books()->finished()->count());
-        $this->assertSame(1, $user->books()->unstarted()->count());
-        $this->assertSame(0, $user->books()->started()->count());
+        $this->assertSame(0, $user->books()->completed()->count());
+        $this->assertSame(1, $user->books()->queued()->count());
+        $this->assertSame(0, $user->books()->current()->count());
     }
 }

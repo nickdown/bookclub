@@ -26,21 +26,21 @@ class User extends Authenticatable
     public function add(Book $book)
     {
         return $this->books()->syncWithoutDetaching($book, [
-            'status' => BookStatus::UNSTARTED
+            'status' => BookStatus::QUEUED
         ]);
     }
 
     public function start(Book $book)
     {
         return $this->books()->syncWithoutDetaching($book, [
-            'status' => BookStatus::STARTED
+            'status' => BookStatus::CURRENT
         ]);
     }
 
     public function finish(Book $book)
     {
         return $this->books()->syncWithoutDetaching($book, [
-            'status' => BookStatus::FINISHED
+            'status' => BookStatus::COMPLETED
         ]);
     }
 

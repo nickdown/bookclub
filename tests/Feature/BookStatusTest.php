@@ -19,11 +19,11 @@ class BookStatusTest extends TestCase
         $user = factory(User::class)->create();
 
         $user->books()->attach($book, [
-            'status' => BookStatus::UNSTARTED,
+            'status' => BookStatus::QUEUED,
         ]);
 
         $raw_status = $user->books()->first()->pivot->status;
 
-        $this->assertSame($raw_status, BookStatus::string(BookStatus::UNSTARTED));
+        $this->assertSame($raw_status, BookStatus::string(BookStatus::QUEUED));
     }
 }

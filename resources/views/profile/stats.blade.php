@@ -5,11 +5,11 @@
             <div class="container">
                 <strong>Books:</strong> {{ $user->books()->count() }}
                 <br>
-                <strong>Current Books:</strong> {{ $user->books()->started()->count() }}
+                <strong>Current Books:</strong> {{ $user->books()->current()->count() }}
                 <br>
-                <strong>Queued Books:</strong> {{ $user->books()->unstarted()->count() }}
+                <strong>Queued Books:</strong> {{ $user->books()->queued()->count() }}
                 <br>
-                <strong>Completed Books:</strong> {{ $user->books()->finished()->count() }}
+                <strong>Completed Books:</strong> {{ $user->books()->completed()->count() }}
             </div>
         </div>
     </div>

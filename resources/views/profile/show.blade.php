@@ -21,7 +21,7 @@
         <div class="card-header">{{ $user->name }}'s Current Books:</div>
 
         <div class="card-body">
-            @include('books.partials.book-list', ['books' => $user->books()->started()->get()])
+            @include('books.partials.book-list', ['books' => $user->books()->current()->get()])
         </div>
     </div>
 
@@ -29,7 +29,7 @@
         <div class="card-header">{{ $user->name }}'s Completed Books:</div>
 
         <div class="card-body">
-            @include('books.partials.book-list', ['books' => $user->books()->finished()->get()])
+            @include('books.partials.book-list', ['books' => $user->books()->completed()->get()])
         </div>
     </div>
 
@@ -37,7 +37,7 @@
         <div class="card-header">{{ $user->name }}'s Queued Books:</div>
 
         <div class="card-body">
-            @include('books.partials.book-list', ['books' => $user->books()->unstarted()->get()])
+            @include('books.partials.book-list', ['books' => $user->books()->queued()->get()])
         </div>
     </div>
 @endsection

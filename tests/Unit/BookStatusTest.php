@@ -9,33 +9,33 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookStatusTest extends TestCase
 {
-    public function test_it_is_unstarted()
+    public function test_it_is_queued()
     {
-        $this->assertSame(0, BookStatus::UNSTARTED);
+        $this->assertSame(0, BookStatus::QUEUED);
     }
 
-    public function test_it_is_started()
+    public function test_it_is_current()
     {
-        $this->assertSame(1, BookStatus::STARTED);
+        $this->assertSame(1, BookStatus::CURRENT);
     }
 
-    public function test_it_is_finished()
+    public function test_it_is_completed()
     {
-        $this->assertSame(2, BookStatus::FINISHED);
+        $this->assertSame(2, BookStatus::COMPLETED);
     }
 
-    public function test_it_returns_unstarted_string()
+    public function test_it_returns_queued_string()
     {
-        $this->assertSame('not started', BookStatus::string(BookStatus::UNSTARTED));
+        $this->assertSame('queued', BookStatus::string(BookStatus::QUEUED));
     }
 
-    public function test_it_returns_started_string()
+    public function test_it_returns_current_string()
     {
-        $this->assertSame('started', BookStatus::string(BookStatus::STARTED));
+        $this->assertSame('current', BookStatus::string(BookStatus::CURRENT));
     }
 
-    public function test_it_returns_finished_string()
+    public function test_it_returns_completed_string()
     {
-        $this->assertSame('finished', BookStatus::string(BookStatus::FINISHED));
+        $this->assertSame('completed', BookStatus::string(BookStatus::COMPLETED));
     }
 }

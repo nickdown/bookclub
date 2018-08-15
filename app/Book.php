@@ -43,18 +43,18 @@ class Book extends Model
         return (float) number_format($rating, 1);
     }
 
-    public function scopeUnstarted($query)
+    public function scopeQueued($query)
     {
-        return $query->where('status', BookStatus::UNSTARTED);
+        return $query->where('status', BookStatus::QUEUED);
     }
 
-    public function scopeStarted($query)
+    public function scopeCurrent($query)
     {
-        return $query->where('status', BookStatus::STARTED);
+        return $query->where('status', BookStatus::CURRENT);
     }
 
-    public function scopeFinished($query)
+    public function scopeCompleted($query)
     {
-        return $query->where('status', BookStatus::FINISHED);
+        return $query->where('status', BookStatus::COMPLETED);
     }
 }
