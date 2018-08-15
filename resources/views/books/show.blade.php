@@ -18,18 +18,20 @@
                 @include('partials.add-book-to-library')
                 <hr>                
             @else
-                This book is in your library!
-                <form action="/books/{{ $book->id }}/remove" method="POST">
-                    @csrf()
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Remove From Collection</button>
-                </form>
+                <div class="d-flex justify-content-between align-items-center">
+                    This book is in your library!
+                    <form action="/books/{{ $book->id }}/remove" method="POST">
+                        @csrf()
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Remove From Collection</button>
+                    </form>
+                </div>
                 <hr>
-                    <div class="row">
-                        <div class="col col-sm-6">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div>
                             @include('books.partials.change-status')
                         </div>
-                        <div class="col col-sm-6">
+                        <div>
                             @include('books.partials.change-rating')
                         </div>
                     </div>
@@ -66,9 +68,20 @@
 
         <div class="card-body">
             @foreach($book->comments as $comment)
-                <strong>{{ $comment->user->name }} said:</strong>
-                <br>
-                <div style="white-space: pre-wrap;">{{ $comment->body }}</div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <strong>{{ $comment->user->name }} said:</strong>
+                        <br>
+                        <div style="white-space: pre-wrap;">{{ $comment->body }}</div>
+                    </div>
+                    @can('delete', $comment)
+                        <form action="/comments/{{ $comment->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    @endcan
+                </div>
                 <hr>
             @endforeach
             <form action="/comments" method="POST">

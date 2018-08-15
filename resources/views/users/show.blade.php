@@ -46,9 +46,22 @@
 
         <div class="card-body">
             @foreach($user->comments as $comment)
-                <strong>{{ $comment->user->name }} said on <a href="{{ $comment->book->url() }}">{{ $comment->book->title }}</a>:</strong>
-                <br>
-                <div style="white-space: pre-wrap;">{{ $comment->body }}</div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <strong>{{ $comment->user->name }} said on <a href="{{ $comment->book->url() }}">{{ $comment->book->title }}</a>:</strong>
+                        <br>
+                        <div style="white-space: pre-wrap;">{{ $comment->body }}</div>
+                    </div>
+                    @can('delete', $comment)
+                    <div class="d-flex align-items-center pl-4">
+                        <form action="/comments/{{ $comment->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                    @endcan
+                </div>
                 <hr>
             @endforeach
         </div>
