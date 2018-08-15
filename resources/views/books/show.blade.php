@@ -67,6 +67,10 @@
         <div class="card-header">Discussion</div>
 
         <div class="card-body">
+            @if($book->comments()->count() == 0)
+                <p class="text-center">No comments yet.</p>
+                <hr>
+            @endif
             @foreach($book->comments as $comment)
                 <div class="d-flex justify-content-between">
                     <div>
