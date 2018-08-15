@@ -48,8 +48,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        if ($user->id == auth()->id()) {
+            return redirect('profile');
+        }
+
         $user->load('books');
-        
+
         return view('users.show', compact('user'));
     }
 
