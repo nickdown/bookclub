@@ -27,10 +27,10 @@
                 <hr>
                     <div class="row">
                         <div class="col col-sm-6">
-                            @include('partials.change-status')
+                            @include('books.partials.change-status')
                         </div>
                         <div class="col col-sm-6">
-                            @include('partials.change-rating')
+                            @include('books.partials.change-rating')
                         </div>
                     </div>
                 <hr>
@@ -59,7 +59,6 @@
                     </tr>
                 </tfoot>
             </table>
-            
         </div>
     </div>
 @endsection
