@@ -1,10 +1,11 @@
-<div class="d-flex flex-fill flex-column p-4">
+<div class="card text-center m-2 p-4" style="width: 16rem;">
     @include('books.partials.book-image')
-    <div class="d-flex justify-content-center py-4">
-        <div class="d-flex flex-column text-center">
-            <a href="{{ $book->url() }}">{{ $book->title }}</a>
-            <span><strong>Author:</strong> {{ $book->author }}</span>
-            <span><strong>Average Rating:</strong> {{ $book->rating ?? 'no reviews' }}</span>
+    <div class="card-body">
+        <h5 class="card-title"><a href="{{ $book->url() }}">{{ $book->title }}</a></h5>
+        <div class="card-text">
+            <strong>Author:</strong> {{ $book->author }}
+            <br>
+            @include('partials.stars', ['rating' => $book->rating])
         </div>
     </div>
 </div>

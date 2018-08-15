@@ -11,7 +11,7 @@
                 <br>
                 <strong>Author:</strong> {{ $book->author }}
                 <br>
-                <strong>Average Rating:</strong> {{ ! is_null($book->rating) ? $book->rating . " / 5" : 'not rated'}}
+                @include('partials.stars', ['rating' => $book->rating])
             </div>
             <hr>
             @if(! auth()->user()->owns($book))
@@ -51,7 +51,7 @@
                         <tr>
                             <td>{{ $reader->name }}</td>
                             <td>{{ $reader->pivot->status }}</td>
-                            <td>{{ ! is_null($reader->pivot->rating) ? $reader->pivot->rating : 'not rated'}}</td>
+                            <td>@include('partials.stars', ['rating' => $reader->pivot->rating])</td>
                         </tr>
                     @endforeach
                 </tbody>
