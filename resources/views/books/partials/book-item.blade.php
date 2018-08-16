@@ -3,7 +3,7 @@
         @include('books.partials.book-image')
     </div>
     <div class="card-body d-flex flex-column justify-content-between" style="min-height: 15rem;">
-        <a href="{{ $book->url() }}">{{ $book->title }}</a>
+        <h4><a href="{{ $book->url() }}">{{ $book->title }}</a></h4>
         <span><strong>Author:</strong> {{ $book->author }}</span>
         @include('partials.stars', ['rating' => $book->rating])
         @if(! $hide_links)
