@@ -6,12 +6,14 @@
         <a href="{{ $book->url() }}">{{ $book->title }}</a>
         <span><strong>Author:</strong> {{ $book->author }}</span>
         @include('partials.stars', ['rating' => $book->rating])
-        <div>
-            @if(auth()->user()->owns($book))
-                In Your Library <i class="fas fa-check"></i>
-            @else
-                @include('partials.add-book-to-library')
-            @endif
-        </div>
+        @if(! $hide_links)
+            <div>
+                @if(auth()->user()->owns($book))
+                    In Your Library <i class="fas fa-check"></i>
+                @else
+                    @include('partials.add-book-to-library')
+                @endif
+            </div>
+        @endif
     </div>
 </div>

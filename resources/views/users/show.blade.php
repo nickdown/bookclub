@@ -21,31 +21,40 @@
     </div>
 
     <div class="card my-4">
-        <div class="card-header">{{ $user->name }}'s Current Books:</div>
+        <div class="card-header">{{ auth()->id() == $user->id ? 'My' : $user->name . "'s" }} Current Books:</div>
 
         <div class="card-body">
-            @include('books.partials.book-list', ['books' => $user->books()->current()->get()])
-        </div>
-    </div>
-    
-    <div class="card my-4">
-        <div class="card-header">{{ $user->name }}'s Queued Books:</div>
-
-        <div class="card-body">
-            @include('books.partials.book-list', ['books' => $user->books()->queued()->get()])
+            @include('books.partials.book-list', [
+                'books' => $user->books()->current()->get(),
+                'hide_links' => auth()->id() == $user->id
+            ])
         </div>
     </div>
 
     <div class="card my-4">
-        <div class="card-header">{{ $user->name }}'s Completed Books:</div>
+        <div class="card-header">{{ auth()->id() == $user->id ? 'My' : $user->name . "'s" }} Queued Books:</div>
 
         <div class="card-body">
-            @include('books.partials.book-list', ['books' => $user->books()->completed()->get()])
+            @include('books.partials.book-list', [
+                'books' => $user->books()->queued()->get(),
+                'hide_links' => auth()->id() == $user->id
+            ])
         </div>
     </div>
 
     <div class="card my-4">
-        <div class="card-header">Discussion</div>
+        <div class="card-header">{{ auth()->id() == $user->id ? 'My' : $user->name . "'s" }} Completed Books:</div>
+
+        <div class="card-body">
+            @include('books.partials.book-list', [
+                'books' => $user->books()->completed()->get(),
+                'hide_links' => auth()->id() == $user->id
+            ])
+        </div>
+    </div>
+
+    <div class="card my-4">
+        <div class="card-header">{{ auth()->id() == $user->id ? 'My' : $user->name . "'s" }} Discussion</div>
 
         <div class="card-body">
             @if($user->comments()->count() == 0)

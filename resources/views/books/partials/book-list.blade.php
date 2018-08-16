@@ -3,6 +3,6 @@
         No books available.
     @endif
     @foreach($books as $book)
-            @include('books.partials.book-item')
+            @include('books.partials.book-item', ['hide_links' => $hide_links ?? null])
     @endforeach
 </div>
