@@ -15,35 +15,34 @@
             </div>
             <hr>
             @if(! auth()->user()->owns($book))
-                @include('partials.add-book-to-library')
+                <div class="d-flex justify-content-center">
+                    @include('partials.add-book-to-library')
+                </div>
                 <hr>                
             @else
                 <div class="d-flex justify-content-between align-items-center">
-                    This book is in your library!
+                    <span>In Library <i class="fas fa-check"></i></span>
                     <form action="/books/{{ $book->id }}/remove" method="POST">
                         @csrf()
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Remove From Collection</button>
+                        <button type="submit" class="btn btn-danger">Remove From Library</button>
                     </form>
                 </div>
                 <hr>
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                         <div>
-                            @include('books.partials.change-status')
-                        </div>
-                        <div>
-                            @include('books.partials.change-rating')
+                            @include('books.partials.book-user-update')
                         </div>
                     </div>
                 <hr>
             @endif
-            
-            <table class="table mt-4">
+            <h3 style="m-0 p-0">Readers:</h3>
+            <table class="table table-borderless" style="padding: -20px">
                 <thead class="thead-light">
                     <tr>
-                        <th>Name:</th>
-                        <th>Status:</th>
-                        <th>Rating:</th>
+                        <th style="width: 33.33%">Name:</th>
+                        <th style="width: 30%">Status:</th>
+                        <th style="width: 36.67%">Rating:</th>
                     </tr>
                 <thead>
                 <tbody>
@@ -55,11 +54,6 @@
                         </tr>
                     @endforeach
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3">Readers: {{ $book->readers()->count() }}</td>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </div>
