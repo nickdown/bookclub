@@ -1,6 +1,6 @@
 <span data-toggle="tooltip" data-placement="top" title="Rating: {{ $rating ?? 'Not rated yet.' }}">
     @if(is_null($rating))
-        Not rated yet.
+        No ratings.
     @else
         @for($i = 0; $i < $rating; $i++)
             @if($rating - $i >= 1)
