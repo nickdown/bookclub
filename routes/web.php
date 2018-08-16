@@ -1,6 +1,12 @@
 <?php
 
-Route::view('/', 'welcome');
+Route::get('/', function() {
+    if (Auth::check()) {
+        return redirect('profile');
+    }
+
+    return view('welcome');
+});
 
 Auth::routes();
 
