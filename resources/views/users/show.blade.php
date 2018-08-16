@@ -5,17 +5,20 @@
         <div class="card-header">{{ auth()->id() == $user->id ? 'My Profile' : $user->name . "'s Profile" }}</div>
 
         <div class="card-body">
-            <div class="d-flex">
-                <img class="m-2" src="{{ $user->avatar }}" alt="{{ $user->name }}" style="border-radius: 50%;" width="75px" height="75px"></img>
-                <div class="m-2">
+            <div class="d-flex justify-content-around">
+                <div class="d-flex flex-column align-items-center">
+                    @include('users.partials.avatar', ['avatar' => $user->avatar])
                     <h1>{{ $user->name }}</h1>
-                    <h4>{{ $user->email }}</h4>
                 </div>
+            </div>
+            <div class="d-flex flex-md-row flex-column align-items-center justify-content-around mt-3">
+                <span><strong>Total Books:</strong> {{ $user->books()->count() }}</span>
+                <span><strong>Current Books:</strong> {{ $user->books()->current()->count() }}</span>
+                <span><strong>Queued Books:</strong> {{ $user->books()->queued()->count() }}</span>
+                <span><strong>Completed Books:</strong> {{ $user->books()->completed()->count() }}</span>
             </div>
         </div>
     </div>
-
-    @include('users.partials.stats')
 
     <div class="card my-4">
         <div class="card-header">{{ $user->name }}'s Current Books:</div>
