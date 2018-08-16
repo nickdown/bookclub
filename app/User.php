@@ -67,12 +67,12 @@ class User extends Authenticatable
 
     public function getAvatarAttribute()
     {
-        $image = Storage::url($this->getOriginal('avatar'));
-        
-        if (is_null($image)) {
-            return '';
+        if (is_null($this->getOriginal('avatar'))) {
+            return null;
         }
 
+        $image = Storage::url($this->getOriginal('avatar'));
+        
         return $image;
     }
 
