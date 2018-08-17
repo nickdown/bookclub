@@ -5,22 +5,21 @@
         <div class="card-header">All Profiles</div>
 
         <div class="card-body p-0">
-            <table class="table mt-4" >
-                <thead class="thead-light">
-                    <tr>
-                        <th>Name:</th>
-                        <th>Books:</th>
-                    </tr>
-                <thead>
-                <tbody>
-                    @foreach($users as $user)
-                        <tr>
-                            <td><a href="{{ $user->url() }}">{{ $user->name }}</a></td>
-                            <td>{{ $user->books()->count() }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="d-flex flex-wrap justify-content-around">
+                @foreach($users as $user)
+                    <div class="card text-center m-2" style="width: 16rem;">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div class="pb-3">
+                                <a href="{{ $user->url() }}">
+                                    @include('users.partials.avatar', ['user' => $user])
+                                </a>
+                            </div>
+                            <h4><a href="{{ $user->url() }}">{{ $user->name }}</a></h4>
+                            {{ $user->books()->count() }} Books
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection
