@@ -5,12 +5,11 @@
         <div class="card-header"><a href="/books">All Books</a> > {{ $book->title }}</div>
 
         <div class="card-body">
-            <div class="text-center">
-                @include('books.partials.book-image', ['image' => $book->image])
-                <br>
-                <br>
-                <strong>Author:</strong> {{ $book->author }}
-                <br>
+            <div class="d-flex flex-column align-items-center">
+                <span style="max-width: 15rem;">
+                    @include('books.partials.book-image', ['image' => $book->image])
+                </span>
+                <span><strong>Author:</strong> {{ $book->author }}</span>
                 @include('partials.stars', ['rating' => $book->rating])
             </div>
             <hr>
@@ -25,7 +24,7 @@
                     <form action="/books/{{ $book->id }}/remove" method="POST">
                         @csrf()
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Remove From Library</button>
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
                     </form>
                 </div>
                 <hr>
