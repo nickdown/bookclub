@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-around">
                 <div class="d-flex flex-column align-items-center">
-                    @include('users.partials.avatar', ['avatar' => $user->avatar])
+                    @include('users.partials.avatar', ['user' => $user])
                     <h1>{{ $user->name }}</h1>
                 </div>
             </div>
