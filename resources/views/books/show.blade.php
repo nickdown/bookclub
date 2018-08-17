@@ -87,7 +87,7 @@
                 <input type="hidden" name="book" value="{{ $book->id }}">
                 <div class="form-group">
                     <label for="body">Add a Comment:</label>
-                    <textarea class="form-control" id="body" name="body" placeholder="Your opinion is valueable!"></textarea>
+                    <textarea class="form-control" id="body" name="body" placeholder="Your opinion is valuable!"></textarea>
                 </div>
                 
                 <button class="btn btn-primary">Submit</button>
