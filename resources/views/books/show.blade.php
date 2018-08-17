@@ -6,7 +6,7 @@
 
         <div class="card-body">
             <div class="text-center">
-                @include('books.partials.book-image')
+                @include('books.partials.book-image', ['image' => $book->image])
                 <br>
                 <br>
                 <strong>Author:</strong> {{ $book->author }}

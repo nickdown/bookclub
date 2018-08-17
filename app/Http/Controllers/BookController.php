@@ -43,8 +43,12 @@ class BookController extends Controller
             'image' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
         ]);
         
+        info('storing book');
+
         $file = $request->file('image');
         $filename = 'book-' . time() . '.' . $file->getClientOriginalExtension();
+        
+        info('filename ' . $filename);
         $path = $file->storeAs('public', $filename);
 
         $book = Book::firstOrCreate([

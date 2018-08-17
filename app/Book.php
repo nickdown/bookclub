@@ -24,12 +24,13 @@ class Book extends Model
 
     public function getImageAttribute()
     {
+        if (is_null($this->getOriginal('image'))) {
+            info('');
+            return null;
+        }
+        
         $image = Storage::url($this->getOriginal('image'));
         
-        if (is_null($image)) {
-            return '/public/images/book-default.jpg';
-        }
-
         return $image;
     }
 
