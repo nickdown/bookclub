@@ -66,20 +66,7 @@
                 <hr>
             @endif
             @foreach($book->comments as $comment)
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <strong><a href="{{ $comment->user->url() }}">{{ $comment->user->name }}</a> said:</strong>
-                        <br>
-                        <div style="white-space: pre-wrap;">{{ $comment->body }}</div>
-                    </div>
-                    @can('delete', $comment)
-                        <form action="/comments/{{ $comment->id }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
-                    @endcan
-                </div>
+                @include('comments.row')
                 <hr>
             @endforeach
             <form action="/comments" method="POST">
