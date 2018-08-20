@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookRatingTest extends TestCase
@@ -16,7 +15,7 @@ class BookRatingTest extends TestCase
         $user = factory('App\User')->create();
 
         $user->books()->attach($book, [
-            'rating' => 4
+            'rating' => 4,
         ]);
 
         $this->assertSame(4, $user->books()->first()->pivot->rating);
@@ -28,13 +27,13 @@ class BookRatingTest extends TestCase
     {
         $book = factory('App\Book')->create();
         $book->readers()->attach(factory('App\User')->create(), [
-            'rating' => 4
+            'rating' => 4,
         ]);
         $book->readers()->attach(factory('App\User')->create(), [
-            'rating' => 2
+            'rating' => 2,
         ]);
         $book->readers()->attach(factory('App\User')->create(), [
-            'rating' => 4
+            'rating' => 4,
         ]);
 
         $this->assertSame(3.3, $book->rating);

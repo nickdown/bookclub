@@ -37,7 +37,7 @@ class CommentController extends Controller
     {
         $this->validate($request, [
             'body' => 'required|string',
-            'book' => 'required|integer|exists:books,id'
+            'book' => 'required|integer|exists:books,id',
         ]);
 
         $comment = new Comment;
@@ -94,7 +94,7 @@ class CommentController extends Controller
         $this->authorize('delete', $comment);
 
         $comment->delete();
-        
+
         return redirect()->back();
     }
 }

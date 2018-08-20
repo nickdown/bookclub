@@ -9,15 +9,15 @@ class BookUser extends Pivot
 {
     protected $casts = [
         'status' => 'integer',
-        'rating' => 'integer'
+        'rating' => 'integer',
     ];
 
     public function getRatingAttribute()
     {
         $rating = $this->getOriginal('rating');
-        
+
         if (is_null($rating)) {
-            return null;
+            return;
         }
 
         return (int) $rating;

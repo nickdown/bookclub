@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\Book;
-use App\Comment;
-use App\BookUser;
 use App\Statuses\BookStatus;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
@@ -32,21 +29,21 @@ class User extends Authenticatable
     public function add(Book $book)
     {
         return $this->books()->syncWithoutDetaching($book, [
-            'status' => BookStatus::QUEUED
+            'status' => BookStatus::QUEUED,
         ]);
     }
 
     public function start(Book $book)
     {
         return $this->books()->syncWithoutDetaching($book, [
-            'status' => BookStatus::CURRENT
+            'status' => BookStatus::CURRENT,
         ]);
     }
 
     public function finish(Book $book)
     {
         return $this->books()->syncWithoutDetaching($book, [
-            'status' => BookStatus::COMPLETED
+            'status' => BookStatus::COMPLETED,
         ]);
     }
 
@@ -68,11 +65,11 @@ class User extends Authenticatable
     public function getAvatarAttribute()
     {
         if (is_null($this->getOriginal('avatar'))) {
-            return null;
+            return;
         }
 
         $image = Storage::url($this->getOriginal('avatar'));
-        
+
         return $image;
     }
 
@@ -94,9 +91,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function url($suffix = "")
+    public function url($suffix = '')
     {
-        return "/users/" . $this->id . $suffix;
+        return '/users/'.$this->id.$suffix;
     }
-
 }

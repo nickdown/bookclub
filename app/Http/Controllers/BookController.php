@@ -40,21 +40,21 @@ class BookController extends Controller
         $this->validate($request, [
             'title' => 'required|max:255',
             'author' => 'required|max:255',
-            'image' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
+            'image' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        
+
         info('storing book');
 
         $file = $request->file('image');
-        $filename = 'book-' . time() . '.' . $file->getClientOriginalExtension();
-        
-        info('filename ' . $filename);
+        $filename = 'book-'.time().'.'.$file->getClientOriginalExtension();
+
+        info('filename '.$filename);
         $path = $file->storeAs('public', $filename);
 
         $book = Book::firstOrCreate([
             'author' => $request->author,
             'title' => $request->title,
-            'image' => $path
+            'image' => $path,
         ]);
 
         return redirect($book->url());

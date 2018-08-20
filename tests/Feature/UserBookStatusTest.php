@@ -3,9 +3,8 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Statuses\BookStatus;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserBookStatusTest extends TestCase
 {
@@ -15,7 +14,7 @@ class UserBookStatusTest extends TestCase
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
-        
+
         $this->assertNull($user->bookStatus($book));
     }
 
@@ -23,9 +22,9 @@ class UserBookStatusTest extends TestCase
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
-        
+
         $user->books()->attach($book, [
-            'status' => BookStatus::QUEUED
+            'status' => BookStatus::QUEUED,
         ]);
 
         $this->assertSame(BookStatus::string(BookStatus::QUEUED), $user->bookStatus($book));
@@ -37,7 +36,7 @@ class UserBookStatusTest extends TestCase
         $user = factory('App\User')->create();
 
         $user->books()->attach($book, [
-            'status' => BookStatus::CURRENT
+            'status' => BookStatus::CURRENT,
         ]);
 
         $this->assertSame(BookStatus::string(BookStatus::CURRENT), $user->bookStatus($book));
@@ -49,7 +48,7 @@ class UserBookStatusTest extends TestCase
         $user = factory('App\User')->create();
 
         $user->books()->attach($book, [
-            'status' => BookStatus::COMPLETED
+            'status' => BookStatus::COMPLETED,
         ]);
 
         $this->assertSame(BookStatus::string(BookStatus::COMPLETED), $user->bookStatus($book));
