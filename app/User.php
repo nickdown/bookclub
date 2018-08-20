@@ -21,6 +21,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function isAdmin()
+    {
+        return $this->email === "nick@nickdown.com";
+    }
+
     public function owns(Book $book): bool
     {
         return $this->books->find($book) ? true : false;
