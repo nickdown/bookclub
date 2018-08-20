@@ -10,7 +10,7 @@ class AdminSeeder extends Seeder
     {
         $me = factory(User::class)->create([
             'name' => 'Nick',
-            'email' => 'nick@nickdown.com'
+            'email' => 'nick@nickdown.com',
         ]);
 
         foreach (range(0, 5) as $i) {

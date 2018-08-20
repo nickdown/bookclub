@@ -16,6 +16,5 @@ class DatabaseSeeder extends Seeder
             PeopleAndBooksSeeder::class,
             CommentsSeeder::class,
         ]);
-        
     }
 }

@@ -2,11 +2,9 @@
 
 namespace App;
 
-use App\User;
-use App\BookUser;
 use App\Statuses\BookStatus;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Book extends Model
 {
@@ -26,26 +24,28 @@ class Book extends Model
     {
         if (is_null($this->getOriginal('image'))) {
             info('');
-            return null;
+
+            return;
         }
-        
+
         $image = Storage::url($this->getOriginal('image'));
-        
+
         return $image;
     }
 
-    public function url($suffix = "")
+    public function url($suffix = '')
     {
-        return "/books/" . $this->id . $suffix;
+        return '/books/'.$this->id.$suffix;
     }
 
     public function getRatingAttribute()
     {
         $rating = BookUser::where('book_id', $this->id)->avg('rating');
-        
+
         if (is_null($rating)) {
-            return null;
+            return;
         }
+
         return (float) number_format($rating, 1);
     }
 

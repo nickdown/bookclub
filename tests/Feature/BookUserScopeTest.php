@@ -3,22 +3,21 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Statuses\BookStatus;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookUserScopeTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /** @test */
-    function a_book_user_has_a_completed_scope()
+    public function a_book_user_has_a_completed_scope()
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
-        
+
         $user->books()->attach($book, [
-            'status' => BookStatus::COMPLETED
+            'status' => BookStatus::COMPLETED,
         ]);
 
         $this->assertSame(1, $user->books()->count());
@@ -28,13 +27,13 @@ class BookUserScopeTest extends TestCase
     }
 
     /** @test */
-    function a_book_user_has_a_current_scope()
+    public function a_book_user_has_a_current_scope()
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
 
         $user->books()->attach($book, [
-            'status' => BookStatus::CURRENT
+            'status' => BookStatus::CURRENT,
         ]);
 
         $this->assertSame(1, $user->books()->count());
@@ -44,13 +43,13 @@ class BookUserScopeTest extends TestCase
     }
 
     /** @test */
-    function a_book_user_has_an_queued_scope()
+    public function a_book_user_has_an_queued_scope()
     {
         $book = factory('App\Book')->create();
         $user = factory('App\User')->create();
 
         $user->books()->attach($book, [
-            'status' => BookStatus::QUEUED
+            'status' => BookStatus::QUEUED,
         ]);
 
         $this->assertSame(1, $user->books()->count());

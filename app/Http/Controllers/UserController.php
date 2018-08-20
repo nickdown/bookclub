@@ -81,19 +81,19 @@ class UserController extends Controller
 
         $this->validate($request, [
             'name' => 'nullable|string|max:255',
-            'avatar' => 'file|image|mimes:jpeg,png,jpg|max:2048'
+            'avatar' => 'file|image|mimes:jpeg,png,jpg|max:2048',
         ]);
         if ($request->has('name') && ! is_null($request->input('name'))) {
             $user->name = $request->name;
         }
-        
+
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
-            $filename = 'avatar-' . time() . '.' . $file->getClientOriginalExtension();
+            $filename = 'avatar-'.time().'.'.$file->getClientOriginalExtension();
             $path = $file->storeAs('public', $filename);
             $user->avatar = $path;
         }
-       
+
         $user->save();
 
         return redirect()->back();

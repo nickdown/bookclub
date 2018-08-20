@@ -20,19 +20,19 @@ class BookUserController extends Controller
     public function update(Request $request, Book $book)
     {
         $user = auth()->user();
-        
+
         if ($request->has('status')) {
             $user->books()->updateExistingPivot($book, [
-                'status' => $request->input('status')
+                'status' => $request->input('status'),
             ]);
         }
 
         if ($request->has('rating')) {
             $user->books()->updateExistingPivot($book, [
-                'rating' => $request->input('rating')
+                'rating' => $request->input('rating'),
             ]);
         }
-        
+
         return redirect()->back();
     }
 

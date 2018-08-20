@@ -2,13 +2,14 @@
 
 namespace App\Statuses;
 
-class BookStatus 
+class BookStatus
 {
     const QUEUED = 0;
     const CURRENT = 1;
     const COMPLETED = 2;
 
-    public static function string($status) {
+    public static function string($status)
+    {
         switch ($status) {
             case self::QUEUED:
                 return 'queued';
@@ -21,4 +22,3 @@ class BookStatus
         }
     }
 }
-
