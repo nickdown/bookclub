@@ -23,7 +23,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->email === "nick@nickdown.com";
+        return $this->email === 'nick@nickdown.com';
     }
 
     public function owns(Book $book): bool
