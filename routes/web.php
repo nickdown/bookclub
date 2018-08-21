@@ -16,6 +16,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('profile', 'ProfileController@index')->name('profile');
     Route::get('/profile/edit', 'UserController@edit')->name('users.edit');
+
+    Route::get('/activity', 'ActivityController@index')->name('activity.index');
+
     Route::patch('/profile', 'UserController@update')->name('users.update');
 
     Route::post('/user/books', 'BookUserController@store');
